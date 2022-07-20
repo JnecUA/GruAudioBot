@@ -1,10 +1,11 @@
+import certifi
 from pymongo.mongo_client import MongoClient
 from pymongo.collection import Collection
 
 class Database:
     def __init__(self, uri) -> None:
         self.uri = uri
-        client = MongoClient(self.uri)
+        client = MongoClient(self.uri, tlsCAFile=certifi.where())
         self.db = client.get_database("GruAudioBot")
 
     def get_collection(self, collection_name: str) -> Collection:
