@@ -1,6 +1,7 @@
 from typing import Any
 from pymongo.collection import Collection
 
+
 class AbstractService:
     def __init__(self, collection: Collection) -> None:
         self.model = collection
@@ -15,7 +16,7 @@ class AbstractService:
             dict[str, Any]: dict to database query
         """
         query = {}
-        for key,value in vars.items():
+        for key, value in vars.items():
             if (key != 'self' and key != 'query') and (value != None):
                 query[key] = value
         return query

@@ -2,6 +2,7 @@ import certifi
 from pymongo.mongo_client import MongoClient
 from pymongo.collection import Collection
 
+
 class Database:
     def __init__(self, uri) -> None:
         self.uri = uri
