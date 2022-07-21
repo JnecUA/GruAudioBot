@@ -3,6 +3,7 @@ from handlers.handler import AbstractHandler
 from aiogram import Bot, Dispatcher, types
 
 from services.service import Services
+from handlers import keybords as kb
 
 
 class StartHandler(AbstractHandler):
@@ -13,13 +14,13 @@ class StartHandler(AbstractHandler):
     def wrap(self) -> None:
         @self.dp.message_handler(commands=['start'])
         async def start(message: types.Message):
-            user = self.userService.create_user(
+            self.userService.create_user(
                 username=message.from_user.username, chat_id=message.chat.id)
-            await message.answer(f'Сосать бояться sex={user}')
+            await message.answer(f'Привет, я помогу сделать твои голосовые сообщение исключительно чистыми.\n\nЕщё я умею разделять музыку на дорожки вокал/барабаны/басс/другое и делать мемы. Хочешь попробовать?', reply_markup=kb.start())
 
         @self.dp.message_handler(content_types=["voice"])
         async def voice_download(message: types.Message):
-            file_path = await self.file_download(message.voice.file_id, 'mp3')
+            file_path = await self.file_download(message.voice.file_id, 'wav')
             await self.bot.send_voice(message.chat.id, open(file_path, 'rb'))
             os.remove(file_path)
             await message.answer('Nice voice')

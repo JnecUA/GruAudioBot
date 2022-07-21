@@ -1,4 +1,6 @@
 from abc import ABCMeta
+from typing import Union
+from aiogram import types
 
 from aiogram import Bot, Dispatcher
 from services.service import Services
@@ -12,6 +14,13 @@ class AbstractHandler:
         self.dp = dp
         self.services = services
         self.wrap()
+
+    async def answer(self, call: types.CallbackQuery, text: str, reply_markup: Union[types.InlineKeyboardMarkup, None] = None):
+        try:
+            await call.message.edit_text(text)
+            await call.message.edit_reply_markup(reply_markup)
+        except:
+            pass
 
     async def file_download(self, file_id: str, extension: str) -> str:
         file = await self.bot.get_file(file_id)
