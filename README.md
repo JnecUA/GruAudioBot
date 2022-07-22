@@ -25,14 +25,14 @@ pip install -r requirements.txt
 touch .conf
 ```
 
-Config file exemple:
+Config file example:
 
 ```
 [bot]
-api_token=5552154704:AAEwLt7yQm86wJdp3dpmLldDgGaYy3R9HDg
+api_token=TELEGRAM_API_TOKEN
 
 [db]
-uri=mongodb+srv://tavenas:180356@cluster0.mhrm9.mongodb.net/?retryWrites=true&w=majority
+uri=MONGO_DB_URI
 ```
 
 ## Start
