@@ -15,7 +15,7 @@ class AbstractHandler:
         self.services = services
         self.wrap()
 
-    async def answer(self, call: types.CallbackQuery, text: str, reply_markup: Union[types.InlineKeyboardMarkup, None] = None):
+    async def answer(self, call: types.CallbackQuery, text: str, reply_markup: Union[types.InlineKeyboardMarkup, None] = None) -> None:
         try:
             await call.message.edit_text(text)
             await call.message.edit_reply_markup(reply_markup)

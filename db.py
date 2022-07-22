@@ -1,12 +1,14 @@
 import certifi
-from pymongo.mongo_client import MongoClient
+from motor.motor_asyncio import AsyncIOMotorClient
 from pymongo.collection import Collection
+import configs
 
 
 class Database:
-    def __init__(self, uri) -> None:
-        self.uri = uri
-        client = MongoClient(self.uri, tlsCAFile=certifi.where())
+    def __init__(self) -> None:
+        config = configs.load('.conf')
+        self.uri = config["db"]["uri"]
+        client = AsyncIOMotorClient(self.uri, tlsCAFile=certifi.where())
         self.db = client.get_database("GruAudioBot")
 
     def get_collection(self, collection_name: str) -> Collection:
