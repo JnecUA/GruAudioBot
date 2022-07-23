@@ -22,8 +22,8 @@ class WidePutinHandler(AbstractHandler):
         async def wide_putin_create(message: types.Message):
             wait_message = await message.answer('Обрабатываю...')
             file_path = await self.file_download(message.video.file_id, 'mp4')
-            await WidePutin().create(file_path)
-            await self.bot.send_video(message.chat.id, open(file_path, 'rb'))
+            output_path = await WidePutin().create(file_path)
+            await self.bot.send_video(message.chat.id, open(output_path, 'rb'))
             await self.bot.delete_message(message.chat.id, wait_message.message_id)
             await message.delete()
-            os.remove(file_path)
+            os.remove(output_path)
