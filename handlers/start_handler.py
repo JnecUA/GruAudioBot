@@ -27,10 +27,3 @@ class StartHandler(AbstractHandler):
             await self.bot.send_voice(message.chat.id, open(file_path, 'rb'))
             os.remove(file_path)
             await message.answer('Nice voice')
-
-        @self.dp.message_handler(content_types=["video"])
-        async def video_download(message: types.Message):
-            file_path = await self.file_download(message.video.file_id, 'mp4')
-            await self.bot.send_video(message.chat.id, open(file_path, 'rb'))
-            os.remove(file_path)
-            await message.answer('Nice video')
