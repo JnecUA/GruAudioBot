@@ -20,11 +20,24 @@ def profile():
 
 def create_meme():
     wide_putin_btn = InlineKeyboardButton(
-        'Широкий Путин', callback_data='wide_putin')
+        'Широкий Путин', callback_data='wide_putin:select_stretch')
     back_btn = InlineKeyboardButton('Назад', callback_data='profile')
     create_meme_kb = InlineKeyboardMarkup()
     create_meme_kb.add(wide_putin_btn).add(back_btn)
     return create_meme_kb
+
+
+def select_stretch():
+    without_btn = InlineKeyboardButton(
+        'Без растяжения', callback_data='wide_putin:1')
+    small_btn = InlineKeyboardButton('Малая', callback_data='wide_putin:2')
+    medium_btn = InlineKeyboardButton('Средняя', callback_data='wide_putin:3')
+    high_btn = InlineKeyboardButton('Большая', callback_data='wide_putin:4')
+    back_btn = InlineKeyboardButton('Назад', callback_data='create_meme')
+    select_stretch_kb = InlineKeyboardMarkup()
+    select_stretch_kb.add(without_btn).add(
+        small_btn, medium_btn, high_btn).add(back_btn)
+    return select_stretch_kb
 
 
 def back(callback: str):

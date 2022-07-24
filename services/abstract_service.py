@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Dict
 from pymongo.collection import Collection
 
 
@@ -6,7 +6,7 @@ class AbstractService:
     def __init__(self, collection: Collection) -> None:
         self.model = collection
 
-    def create_simple_query(self, vars: dict[str, Any]) -> dict[str, Any]:
+    def create_simple_query(self, vars: Dict[str, Any]) -> Dict[str, Any]:
         """Creates a dictionary from function variables obtained using locals()
 
         Args:
