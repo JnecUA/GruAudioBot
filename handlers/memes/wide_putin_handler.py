@@ -4,7 +4,7 @@ from handlers.filters.action_filter import ActionFilter
 from handlers.handler import AbstractHandler
 from media_core.memes import WidePutin
 from services.service import Services
-from handlers import keybords as kb
+from handlers import keyboards as kb
 
 
 class WidePutinHandler(AbstractHandler):
@@ -29,4 +29,5 @@ class WidePutinHandler(AbstractHandler):
             await self.bot.send_video(message.chat.id, open(output_path, 'rb'))
             await self.bot.delete_message(message.chat.id, wait_message.message_id)
             await message.delete()
+            os.remove(file_path)
             os.remove(output_path)

@@ -1,7 +1,7 @@
 from aiogram import Bot, Dispatcher, types
 from handlers.handler import AbstractHandler
 from services.service import Services
-from handlers import keybords as kb
+from handlers import keyboards as kb
 
 
 class CreateMemeHandler(AbstractHandler):

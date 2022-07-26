@@ -1,7 +1,7 @@
-import subprocess
+import asyncio
 
 
 class FFmpeg:
     async def exec(self, command: str):
-        process = subprocess.Popen(command.split())
-        output, error = process.communicate()
+        process = await asyncio.create_subprocess_shell(command)
+        return process
