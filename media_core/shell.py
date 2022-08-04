@@ -1,7 +1,7 @@
 import asyncio
 
 
-class FFmpeg:
+class Shell:
     async def exec(self, command: str):
         process = await asyncio.create_subprocess_shell(command)
         return process

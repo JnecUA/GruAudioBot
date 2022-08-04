@@ -6,7 +6,7 @@ We are creating a **awesome** telegram bot for audio processing.
 
 Memes:
 ❌Bass Boosting
-❌Wide Putin
+✅Wide Putin
 ❌Сompression
 
 ## Installing

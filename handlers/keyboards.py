@@ -1,4 +1,4 @@
-from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton, WebAppInfo
 
 
 def start():
@@ -10,11 +10,13 @@ def start():
 
 def profile():
     separate_btn = InlineKeyboardButton(
-        'Разделить звук на дорожки', callback_data='separate')
+        'Разделить звук на дорожки', callback_data='separate:select')
     create_meme_btn = InlineKeyboardButton(
         'Сделать мем', callback_data='create_meme')
+    webApp = WebAppInfo(url="https://tavenas.github.io/GruBotClient/")
+    pay_btn = InlineKeyboardButton(text="Оплата", web_app=webApp)
     profile_kb = InlineKeyboardMarkup()
-    profile_kb.add(separate_btn).add(create_meme_btn)
+    profile_kb.add(separate_btn).add(create_meme_btn).add(pay_btn)
     return profile_kb
 
 
@@ -38,6 +40,19 @@ def select_stretch():
     select_stretch_kb.add(without_btn).add(
         small_btn, medium_btn, high_btn).add(back_btn)
     return select_stretch_kb
+
+
+def select_separate():
+    stems2_btn = InlineKeyboardButton(
+        '2stems', callback_data='separate:2stems')
+    stems4_btn = InlineKeyboardButton(
+        '4stems', callback_data='separate:4stems')
+    stems5_btn = InlineKeyboardButton(
+        '5stems', callback_data='separate:5stems')
+    back_btn = InlineKeyboardButton('Назад', callback_data='profile')
+    select_separate_kb = InlineKeyboardMarkup()
+    select_separate_kb.add(stems2_btn, stems4_btn, stems5_btn).add(back_btn)
+    return select_separate_kb
 
 
 def back(callback: str):

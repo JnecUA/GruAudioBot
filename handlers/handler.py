@@ -22,9 +22,9 @@ class AbstractHandler:
         except:
             pass
 
-    async def file_download(self, file_id: str, extension: str) -> str:
+    async def file_download(self, file_id: str, extension: str, path_ending: str = '') -> str:
         file = await self.bot.get_file(file_id)
-        file_path = f'static/{file.file_unique_id}.{extension}'
+        file_path = f'static/{path_ending}/{file.file_unique_id}.{extension}'
         await self.bot.download_file(file.file_path, file_path)
         return file_path
 
