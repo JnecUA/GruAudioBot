@@ -12,9 +12,9 @@ class PaymentFilter(AbstractFilter):
 
     async def check(self, message: types.Message) -> bool:
         user = await self.userService.get_user(chat_id=message.chat.id)
-        last_payment = str(user['payments'].get(self.payment, None))
+        last_payment = user['payments'].get(self.payment, None)
         if last_payment:
-            payment_time_left = datetime.now() - datetime.fromisoformat(last_payment)
+            payment_time_left = datetime.now() - datetime.fromisoformat(str(last_payment))
             payment_ended = payment_time_left.total_seconds() // (3600 * 24) > 30
         if last_payment is None or payment_ended:
             await message.delete()
