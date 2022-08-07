@@ -1,4 +1,4 @@
-from media_core.ffmpeg import FFmpeg
+from media_core.shell import Shell
 
 
 class WidePutin:
@@ -10,6 +10,6 @@ class WidePutin:
         crop_args = f'crop=iw*{round(1/ratio, 2)}:ih'
         threads_args = '-threads 4'
         command = f'ffmpeg -loglevel panic -i {file_path} {change_audio_args} {resize_args},{crop_args} {output_path} {threads_args}'
-        process = await FFmpeg().exec(command)
+        process = await Shell().exec(command)
         await process.communicate()
         return output_path

@@ -27,3 +27,12 @@ class StartHandler(AbstractHandler):
             await self.bot.send_voice(message.chat.id, open(file_path, 'rb'))
             os.remove(file_path)
             await message.answer('Nice voice')
+
+        @self.dp.pre_checkout_query_handler(lambda query: True)
+        async def checkout(pre_checkout_query: types.PreCheckoutQuery):
+            await self.bot.answer_pre_checkout_query(pre_checkout_query.id, ok=True)
+
+        @self.dp.message_handler(content_types=types.ContentTypes.SUCCESSFUL_PAYMENT)
+        async def got_payment(message: types.Message):
+            await self.bot.send_message(message.chat.id,
+                                        f'<b>Оплата успешно произведена</b>', parse_mode='HTML')

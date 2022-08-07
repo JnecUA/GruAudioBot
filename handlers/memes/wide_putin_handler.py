@@ -24,7 +24,7 @@ class WidePutinHandler(AbstractHandler):
             action = await self.userService.get_action(message.chat.id)
             ratio = int(action[-1])
             wait_message = await message.answer('Обрабатываю...')
-            file_path = await self.file_download(message.video.file_id, 'mp4')
+            file_path = await self.file_download(message.video.file_id, 'mp4', 'memes')
             output_path = await WidePutin().create(file_path, ratio)
             await self.bot.send_video(message.chat.id, open(output_path, 'rb'))
             await self.bot.delete_message(message.chat.id, wait_message.message_id)
