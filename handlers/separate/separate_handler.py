@@ -2,6 +2,7 @@ import os
 import shutil
 from aiogram import Bot, Dispatcher, types
 from handlers.filters.action_filter import ActionFilter
+from handlers.filters.payment_filter import PaymentFilter
 from handlers.handler import AbstractHandler
 from media_core.separate import Separate
 from services.service import Services
@@ -20,7 +21,7 @@ class SeparateHandler(AbstractHandler):
             await self.userService.set_action(call.message.chat.id, f'separate:{stems}')
             await self.answer(call, 'Скинь мне аудио для разделения', kb.back('separate:select'))
 
-        @self.dp.message_handler(ActionFilter('separate:\dstems'), content_types=['audio'])
+        @self.dp.message_handler(ActionFilter('separate:\dstems'), PaymentFilter('separate'), content_types=['audio'])
         async def separate_create(message: types.Message):
             action = await self.userService.get_action(message.chat.id)
             stems = action[-6:]

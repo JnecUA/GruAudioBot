@@ -2,28 +2,36 @@ from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton, WebAppInfo
 
 
 def start():
-    yes_btn = InlineKeyboardButton('Конечно хочу!', callback_data='profile')
+    yes_btn = InlineKeyboardButton('Конечно хочу!', callback_data='menu')
     start_kb = InlineKeyboardMarkup()
     start_kb.add(yes_btn)
     return start_kb
 
 
-def profile():
+def menu():
     separate_btn = InlineKeyboardButton(
         'Разделить звук на дорожки', callback_data='separate:select')
     create_meme_btn = InlineKeyboardButton(
         'Сделать мем', callback_data='create_meme')
+    payments_btn = InlineKeyboardButton('Подписки', callback_data='payments')
+    menu_kb = InlineKeyboardMarkup()
+    menu_kb.add(separate_btn).add(create_meme_btn).add(payments_btn)
+    return menu_kb
+
+
+def payments():
     webApp = WebAppInfo(url="https://tavenas.github.io/GruBotClient/")
-    pay_btn = InlineKeyboardButton(text="Оплата", web_app=webApp)
-    profile_kb = InlineKeyboardMarkup()
-    profile_kb.add(separate_btn).add(create_meme_btn).add(pay_btn)
-    return profile_kb
+    pay_btn = InlineKeyboardButton('Оплата', web_app=webApp)
+    back_btn = InlineKeyboardButton('Назад', callback_data='menu')
+    payments_kb = InlineKeyboardMarkup()
+    payments_kb.add(pay_btn).add(back_btn)
+    return payments_kb
 
 
 def create_meme():
     wide_putin_btn = InlineKeyboardButton(
         'Широкий Путин', callback_data='wide_putin:select_stretch')
-    back_btn = InlineKeyboardButton('Назад', callback_data='profile')
+    back_btn = InlineKeyboardButton('Назад', callback_data='menu')
     create_meme_kb = InlineKeyboardMarkup()
     create_meme_kb.add(wide_putin_btn).add(back_btn)
     return create_meme_kb
@@ -49,7 +57,7 @@ def select_separate():
         '4stems', callback_data='separate:4stems')
     stems5_btn = InlineKeyboardButton(
         '5stems', callback_data='separate:5stems')
-    back_btn = InlineKeyboardButton('Назад', callback_data='profile')
+    back_btn = InlineKeyboardButton('Назад', callback_data='menu')
     select_separate_kb = InlineKeyboardMarkup()
     select_separate_kb.add(stems2_btn, stems4_btn, stems5_btn).add(back_btn)
     return select_separate_kb
